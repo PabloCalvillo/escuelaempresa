@@ -20,8 +20,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // STUDENTS
-Route::get('students/list', 'StudentController@listAll')->name('liststudents');
-Route::get('students/add', 'StudentController@addStudent')->name('addStudent');
-Route::post('student/store', 'StudentController@store')->name('storeStudent');
-
-Route::get('companies/', 'CompanyController@index')->name('companyIndex');
+Route::get('/students/list', 'StudentController@listAll')->name('liststudents');
+Route::get('/students/add', 'StudentController@addStudent')->name('addStudent');
+Route::delete('/students/remove/{studentId}', 'StudentController@removeStudent')->name('removeStudent');
+Route::post('/student/store', 'StudentController@store')->name('storeStudent');
+Route::post('/students/update', 'StudentController@update')->name('updateStudent');
+Route::get('/students/edit/{studentId}', 'StudentController@edit')->name('editStudent');

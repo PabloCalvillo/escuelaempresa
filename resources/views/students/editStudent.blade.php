@@ -8,15 +8,15 @@
     {{ csrf_field() }}
     <div class="form-group">
         <label for="name" class="col-md-12 control-label">{{ __("Nombre") }}</label>
-        <input id="name" class="form-control" name="name" value="{{ $student->name }}" />
+        <input id="name" class="form-control" name="name" value="{{ $student->name }}" required />
     </div>
     <div class="form-group">
         <label for="lastname" class="col-md-12 control-label">{{ __("Apellidos") }}</label>
-        <input id="lastname" class="form-control" name="lastname" value="{{ $student->lastname }}" />
+        <input id="lastname" class="form-control" name="lastname" value="{{ $student->lastname }}" required />
     </div>
     <div class="form-group">
         <label for="age" class="col-md-12 control-label">{{ __("Edad") }}</label>
-        <input id="age" class="form-control" name="age" type="number" min="16" max="50" value="{{ $student->age }}" />
+        <input id="age" class="form-control" name="age" type="number" min="16" max="50" value="{{ $student->age }}" required />
     </div>
     <input id="id" name="id" value="{{ $student->id }}" type="hidden" />
     <button type="submit" name="editStudent" class="btn btn-default" hidden> {{ __("Editar alumno ") }} </button>

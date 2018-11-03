@@ -37,7 +37,12 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                    @guest
+                        @else
+                        <li><a href="<?=URL::route('liststudents');?>">Alumnos</a></li>
+                        <li><a href="<?=URL::route('listgrades');?>">Ciclos</a></li>
+                        <li><a href="#">Empresas</a></li>
+                    @endguest
                     </ul>
 
                     <!-- Right Side Of Navbar -->

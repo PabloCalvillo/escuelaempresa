@@ -8,11 +8,11 @@
     {{ csrf_field() }}
     <div class="form-group">
         <label for="name" class="col-md-12 control-label">{{ __("Nombre") }}</label>
-        <input id="name" class="form-control" name="name" value="{{ old('name') }}" />
+        <input id="name" class="form-control" name="name" value="{{ old('name') }}" required />
     </div>
     <div class="form-group">
         <label for="level" class="col-md-12 control-label">{{ __("Nivel") }}</label>
-        <input id="level" class="form-control" name="level" value="{{ old('level') }}" />
+        <input id="level" class="form-control" name="level" value="{{ old('level') }}" required />
     </div>
     <button type="submit" name="addGrade" class="btn btn-default"> {{ __("Añadir ciclo ") }} </button>
     <a href="<?=URL::route('listgrades');?>" class="btn btn-info pull-right"> {{ __("Volver al listado de ciclos") }} </a>

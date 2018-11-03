@@ -26,3 +26,11 @@ Route::delete('/students/remove/{studentId}', 'StudentController@removeStudent')
 Route::post('/student/store', 'StudentController@store')->name('storeStudent');
 Route::post('/students/update', 'StudentController@update')->name('updateStudent');
 Route::get('/students/edit/{studentId}', 'StudentController@edit')->name('editStudent');
+
+// GRADES
+Route::get('/grades/list', 'GradeController@listAll')->name('listgrades');
+Route::get('/grades/add', 'GradeController@addGrade')->name('addGrade');
+Route::delete('/grades/remove/{gradeId}', 'GradeController@removeGrade')->name('removeGrade');
+Route::post('/grade/store', 'GradeController@store')->name('storeGrade');
+Route::post('/grades/update', 'GradeController@update')->name('updateGrade');
+Route::get('/grades/edit/{gradeId}', 'GradeController@edit')->name('editGrade');

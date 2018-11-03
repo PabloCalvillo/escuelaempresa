@@ -19,7 +19,7 @@
         <input id="age" class="form-control" name="age" type="number" min="16" max="50" value="{{ $student->age }}" />
     </div>
     <input id="id" name="id" value="{{ $student->id }}" type="hidden" />
-    <button type="submit" name="addStudent" class="btn btn-default" hidden> {{ __("Editar alumno ") }} </button>
+    <button type="submit" name="editStudent" class="btn btn-default" hidden> {{ __("Editar alumno ") }} </button>
     <a href="<?=URL::route('liststudents');?>" class="btn btn-info pull-right"> {{ __("Volver al listado de alumnos") }} </a>
     </form>
 </div>

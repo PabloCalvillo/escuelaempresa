@@ -3,20 +3,20 @@
 @section('content')
 <div class="row">
 <div class="col-md-8 col-md-offset-2">
-<h1 class="text-center text-mute"> {{ __("Alumnos") }} 
+<h1 class="text-center text-mute"> {{ __("Ciclos") }} 
 @if(Auth::user()->email == 'admin@admin.com')
-<a style="float:right;" href="<?=URL::route('addStudent');?>"><i class="fas fa-user-plus"></i></a>
+<a style="float:right;" href="<?=URL::route('addGrade');?>"><i class="fas fa-user-plus"></i></a>
 @endif
 </h1>
-@forelse($students as $student)
+@forelse($grades as $grade)
 <div class="panel panel-default">
 <div class="panel-heading">
 @if(Auth::user()->email == 'admin@admin.com')
-<a href="../students/edit/{{ $student->id }}"> {{ $student->name }} {{ $student->lastname }}</a>
+<a href="../grades/edit/{{ $grade->id }}"> {{ $grade->name }}</a>
 @else
-{{ $student->name }} {{ $student->lastname }}
+{{ $grade->name }}
 @endif
-<form method="POST" action="../students/remove/{{ $student->id }}" style="float:right;margin:0;">
+<form method="POST" action="../grades/remove/{{ $grade->id }}" style="float:right;margin:0;">
 {{ method_field('DELETE') }} 
 {{ csrf_field() }}
 @if(Auth::user()->email == 'admin@admin.com')
@@ -25,17 +25,17 @@
 </form>
 </div>
 <div class="panel-body">
-Edad: {{ $student->age }}
+Nivel: {{ $grade->level }}
 </div>
 </div>
 @empty
 <div class="alert alert-danger">
-{{ __("No hay ningún alumno en este momento") }}
+{{ __("No hay ningún ciclo en este momento") }}
 </div>
 @endforelse
-@if($students->count())
+@if($grades->count())
 <div style='text-align:center;'>
-{{ $students->links() }}
+{{ $grades->links() }}
 </div>
 @endif
 </div>

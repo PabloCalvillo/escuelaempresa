@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         factory(escuelaempresa\student::class, 70)->create();
+        factory(escuelaempresa\grade::class, 10)->create();
         factory(escuelaempresa\User::class)->create(['name' => 'admin', 'email' => 'admin@admin.com', 'password' => bcrypt('123456')]);
     }
 }

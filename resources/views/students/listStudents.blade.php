@@ -7,7 +7,12 @@
 @forelse($students as $student)
 <div class="panel panel-default">
 <div class="panel-heading">
-<a href="students/{{ $student->id }}"> {{ $student->name }} {{ $student->lastname }}</a>
+<a href="../students/edit/{{ $student->id }}"> {{ $student->name }} {{ $student->lastname }}</a>
+<form method="POST" action="../students/remove/{{ $student->id }}" style="float:right;margin:0;">
+{{ method_field('DELETE') }} 
+{{ csrf_field() }}
+<button type="submit" style="margin-top:-6px;margin-right:-8px;"><i class="far fa-trash-alt"></i></button>
+</form>
 </div>
 <div class="panel-body">
 Edad: {{ $student->age }}

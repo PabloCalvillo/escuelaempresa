@@ -21,4 +21,21 @@ class StudentController extends Controller
         student::create(request()->all());
         return back()->with('message', ['success', __("Alumno añadido correctamente")]);
     }
+
+    public function update(Request $request) {
+        student::where('id', $request->id)
+                ->update(['name'=>$request->name, 'lastname'=>$request->lastname, 'age'=>$request->age]);
+        return back()->with('message', ['success', __("Alumno editado correctamente")]);
+    }
+
+    public function edit($id) {
+        $student = student::find($id);
+        return view('students.editStudent', compact('student'));
+    }
+
+    public function removeStudent($id) {
+        $student = student::find($id);
+        $student->delete();
+        return back()->with('message', ['success', __("Alumno eliminado correctamente")]);
+    }
 }

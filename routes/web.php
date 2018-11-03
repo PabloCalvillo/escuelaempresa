@@ -23,3 +23,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('students/list', 'StudentController@listAll')->name('liststudents');
 Route::get('students/add', 'StudentController@addStudent')->name('addStudent');
 Route::post('student/store', 'StudentController@store')->name('storeStudent');
+
+Route::get('companies/', 'CompanyController@index')->name('companyIndex');

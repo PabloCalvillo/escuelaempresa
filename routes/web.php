@@ -42,3 +42,11 @@ Route::get('/companies/add', 'CompanyController@addForm')->name('companyAddForm'
 Route::post('/companies/', 'CompanyController@store')->name('companyStore');
 Route::get('/companies/edit/{company}', 'CompanyController@editForm')->name('companyEditForm');
 Route::post('/companies/edit/{company}', 'CompanyController@update')->name('companyUpdate');
+
+// STUDIES
+Route::get('/studies/', 'StudyController@index')->name('studyIndex');
+Route::delete('/studies/remove/{study}', 'StudyController@remove')->name('studyRemove');
+Route::get('/studies/add', 'StudyController@addForm')->name('studyAddForm');
+Route::post('/studies/add', 'StudyController@store')->name('studyStore');
+Route::get('/studies/edit/{study}', 'StudyController@editForm')->name('studyEditForm');
+Route::post('/studies/edit/{study}', 'StudyController@update')->name('studyUpdate');

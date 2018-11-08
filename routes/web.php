@@ -50,3 +50,11 @@ Route::get('/studies/add', 'StudyController@addForm')->name('studyAddForm');
 Route::post('/studies/add', 'StudyController@store')->name('studyStore');
 Route::get('/studies/edit/{study}', 'StudyController@editForm')->name('studyEditForm');
 Route::post('/studies/edit/{study}', 'StudyController@update')->name('studyUpdate');
+
+// PETITIONS
+Route::get('/petitions/', 'PetitionController@index')->name('petitionIndex');
+Route::delete('/petitions/remove/{petition}', 'PetitionController@remove')->name('petitionRemove');
+Route::get('/petitions/add', 'PetitionController@addForm')->name('petitionAddForm');
+Route::post('/petitions/add', 'PetitionController@store')->name('petitionStore');
+Route::get('/petitions/edit/{petition}', 'PetitionController@editForm')->name('petitionEditForm');
+Route::post('/petitions/edit/{petition}', 'PetitionController@update')->name('petitionUpdate');

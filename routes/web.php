@@ -1,5 +1,8 @@
 <?php
 
+use escuelaempresa\petition;
+use escuelaempresa\grade;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,3 +61,12 @@ Route::get('/petitions/add', 'PetitionController@addForm')->name('petitionAddFor
 Route::post('/petitions/add', 'PetitionController@store')->name('petitionStore');
 Route::get('/petitions/edit/{petition}', 'PetitionController@editForm')->name('petitionEditForm');
 Route::post('/petitions/edit/{petition}', 'PetitionController@update')->name('petitionUpdate');
+
+// PDF
+Route::get('pdfGradesTypes/{id}', function($id) {
+    $grade = grade::find($id);
+    $petitionsFCT = petition::where('id_grade', $id)->where('type', 'fct')->get();
+    $petitionsPracticas = petition::where('id_grade', $id)->where('type', 'prácticas')->get();
+    $pdf = PDF::loadView('pdf.pdfGradesTypes', ['gradeName' => $grade->name, 'petitionsFCT' => $petitionsFCT, 'petitionsPracticas' => $petitionsPracticas]);
+    return $pdf->download($grade->name . '(Solicitudes).pdf');
+});

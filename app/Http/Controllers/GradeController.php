@@ -41,4 +41,4 @@ class GradeController extends Controller
         $grades->delete();
         return back()->with('message', ['success', __("Ciclo eliminado correctamente")]);
     }
-}
+}   

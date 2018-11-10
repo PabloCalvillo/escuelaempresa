@@ -36,14 +36,7 @@
 					<a href="" style="margin-right: auto;"> {{ $petitionFCT->company->name }}</a> quiere {{ $petitionFCT->n_students }}
 					estudiante{{ $petitionFCT->n_students == 1 ? '' : 's' }} </a>
 				</span>
-				<!--
-				<a href="{{ route('petitionEditForm', ['petitionFCT' => $petitionFCT->id]) }}" style="margin-right: 15px">Editar</a>
-				<form method="POST" action="petitions/remove/{{ $petitionFCT->id }}">
-					{{ method_field('DELETE') }}
-					{{ csrf_field() }}
-					<button type="submit"><i class="far fa-trash-alt"></i></button>
-				</form>
-				-->
+				
 			</div>
 		</div>
 		@endforeach
@@ -57,17 +50,14 @@
 					<a href="" style="margin-right: auto;"> {{ $petitionPractica->company->name }}</a> quiere {{ $petitionPractica->n_students }}
 					estudiante{{ $petitionPractica->n_students == 1 ? '' : 's' }} </a>
 				</span>
-				<!--
-				<a href="{{ route('petitionEditForm', ['petitionFCT' => $petitionFCT->id]) }}" style="margin-right: 15px">Editar</a>
-				<form method="POST" action="petitions/remove/{{ $petitionFCT->id }}">
-					{{ method_field('DELETE') }}
-					{{ csrf_field() }}
-					<button type="submit"><i class="far fa-trash-alt"></i></button>
-				</form>
-				-->
+				
 			</div>
 		</div>
 		@endforeach
+		@if($petitionsFCT->count() > 0 or $petitionsPracticas->count() > 0)
+		<a href="/dam/escuelaempresa/pdfGradesTypes/{{ $grade->id }}" class="btn btn-info pull-right"> {{ __("Descargar PDF") }}
+			</a>
+		@endif
 	</div>
 </div>
 @endsection

@@ -55,7 +55,7 @@
 		</div>
 		@endforeach
 		@if($petitionsFCT->count() > 0 or $petitionsPracticas->count() > 0)
-		<a href="/dam/escuelaempresa/pdfGradesTypes/{{ $grade->id }}" class="btn btn-info pull-right"> {{ __("Descargar PDF") }}
+		<a href="./pdfGradesTypes/{{ $grade->id }}" class="btn btn-info pull-right"> {{ __("Descargar PDF") }}
 			</a>
 		@endif
 	</div>

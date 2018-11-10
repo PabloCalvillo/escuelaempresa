@@ -63,7 +63,7 @@ Route::get('/petitions/edit/{petition}', 'PetitionController@editForm')->name('p
 Route::post('/petitions/edit/{petition}', 'PetitionController@update')->name('petitionUpdate');
 
 // PDF
-Route::get('pdfGradesTypes/{id}', function($id) {
+Route::get('grades/edit/pdfGradesTypes/{id}', function($id) {
     $grade = grade::find($id);
     $petitionsFCT = petition::where('id_grade', $id)->where('type', 'fct')->get();
     $petitionsPracticas = petition::where('id_grade', $id)->where('type', 'prácticas')->get();

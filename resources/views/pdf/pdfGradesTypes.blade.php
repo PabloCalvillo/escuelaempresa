@@ -1,4 +1,4 @@
-<h1>Solicitudes del grado: {{ $gradeName }}</h1>
+<h1>Solicitudes del grado: {{ $gradeName }} de {{ $gradeLevel }}</h1>
 
 @if($petitionsFCT->count() > 0)
 <h1 style="text-align:center;">Solicitudes de FCT</h1>

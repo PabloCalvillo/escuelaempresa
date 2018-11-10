@@ -67,6 +67,6 @@ Route::get('pdfGradesTypes/{id}', function($id) {
     $grade = grade::find($id);
     $petitionsFCT = petition::where('id_grade', $id)->where('type', 'fct')->get();
     $petitionsPracticas = petition::where('id_grade', $id)->where('type', 'prácticas')->get();
-    $pdf = PDF::loadView('pdf.pdfGradesTypes', ['gradeName' => $grade->name, 'petitionsFCT' => $petitionsFCT, 'petitionsPracticas' => $petitionsPracticas]);
+    $pdf = PDF::loadView('pdf.pdfGradesTypes', ['gradeName' => $grade->name, 'gradeLevel' => $grade->level, 'petitionsFCT' => $petitionsFCT, 'petitionsPracticas' => $petitionsPracticas]);
     return $pdf->download($grade->name . '(Solicitudes).pdf');
 });

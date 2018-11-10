@@ -22,7 +22,7 @@
 			</div>
 		@empty
 			<div class="alert alert-danger">
-				{{ __("No hay ningana empresa en este momento") }}
+				{{ __("No hay ninguna empresa en este momento") }}
 			</div>
 		@endforelse
 

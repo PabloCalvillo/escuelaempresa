@@ -3,6 +3,7 @@
 namespace escuelaempresa\Http\Controllers;
 
 use escuelaempresa\grade;
+use escuelaempresa\petition;
 
 use Illuminate\Http\Request;
 
@@ -30,7 +31,9 @@ class GradeController extends Controller
 
     public function edit($id) {
         $grade = grade::find($id);
-        return view('grades.editGrade', compact('grade'));
+        $petitionsFCT = petition::where('id_grade', $id)->where('type', 'fct')->get();
+        $petitionsPracticas = petition::where('id_grade', $id)->where('type', 'prácticas')->get();
+        return view('grades.editGrade', compact('grade', 'petitionsFCT', 'petitionsPracticas'));
     }
 
     public function removeGrade($id) {

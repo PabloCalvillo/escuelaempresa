@@ -17,8 +17,7 @@ use escuelaempresa\grade;
 Route::get('/', function () {
     return redirect('/home');
 });
-
-// Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
 
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -31,73 +30,75 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
-Route::get('/home', 'HomeController@index')->name('home');
 
-// STUDENTS
-Route::get('/students/list', 'StudentController@listAll')->name('liststudents');
-Route::get('/students/add', 'StudentController@addStudent')->name('addStudent');
-Route::delete('/students/remove/{studentId}', 'StudentController@removeStudent')->name('removeStudent');
-Route::post('/student/store', 'StudentController@store')->name('storeStudent');
-Route::post('/students/update', 'StudentController@update')->name('updateStudent');
-Route::get('/students/edit/{studentId}', 'StudentController@edit')->name('editStudent');
+Route::group(['middleware' => 'auth'], function() {
 
-// GRADES
-Route::get('/grades/list', 'GradeController@listAll')->name('listgrades');
-Route::get('/grades/add', 'GradeController@addGrade')->name('addGrade');
-Route::delete('/grades/remove/{gradeId}', 'GradeController@removeGrade')->name('removeGrade');
-Route::post('/grade/store', 'GradeController@store')->name('storeGrade');
-Route::post('/grades/update', 'GradeController@update')->name('updateGrade');
-Route::get('/grades/edit/{gradeId}', 'GradeController@edit')->name('editGrade');
+	// STUDENTS
+	Route::get('/students/list', 'StudentController@listAll')->name('liststudents');
+	Route::get('/students/add', 'StudentController@addStudent')->name('addStudent');
+	Route::delete('/students/remove/{studentId}', 'StudentController@removeStudent')->name('removeStudent');
+	Route::post('/student/store', 'StudentController@store')->name('storeStudent');
+	Route::post('/students/update', 'StudentController@update')->name('updateStudent');
+	Route::get('/students/edit/{studentId}', 'StudentController@edit')->name('editStudent');
 
-// COMPANIES
-Route::get('/companies/', 'CompanyController@index')->name('companyIndex');
-Route::delete('/companies/remove/{company}', 'CompanyController@remove')->name('companyRemove');
-Route::get('/companies/add', 'CompanyController@addForm')->name('companyAddForm');
-Route::post('/companies/', 'CompanyController@store')->name('companyStore');
-Route::get('/companies/edit/{company}', 'CompanyController@editForm')->name('companyEditForm');
-Route::post('/companies/edit/{company}', 'CompanyController@update')->name('companyUpdate');
+	// GRADES
+	Route::get('/grades/list', 'GradeController@listAll')->name('listgrades');
+	Route::get('/grades/add', 'GradeController@addGrade')->name('addGrade');
+	Route::delete('/grades/remove/{gradeId}', 'GradeController@removeGrade')->name('removeGrade');
+	Route::post('/grade/store', 'GradeController@store')->name('storeGrade');
+	Route::post('/grades/update', 'GradeController@update')->name('updateGrade');
+	Route::get('/grades/edit/{gradeId}', 'GradeController@edit')->name('editGrade');
 
-// STUDIES
-Route::get('/studies/', 'StudyController@index')->name('studyIndex');
-Route::delete('/studies/remove/{study}', 'StudyController@remove')->name('studyRemove');
-Route::get('/studies/add', 'StudyController@addForm')->name('studyAddForm');
-Route::post('/studies/add', 'StudyController@store')->name('studyStore');
-Route::get('/studies/edit/{study}', 'StudyController@editForm')->name('studyEditForm');
-Route::post('/studies/edit/{study}', 'StudyController@update')->name('studyUpdate');
+	// COMPANIES
+	Route::get('/companies/', 'CompanyController@index')->name('companyIndex');
+	Route::delete('/companies/remove/{company}', 'CompanyController@remove')->name('companyRemove');
+	Route::get('/companies/add', 'CompanyController@addForm')->name('companyAddForm');
+	Route::post('/companies/', 'CompanyController@store')->name('companyStore');
+	Route::get('/companies/edit/{company}', 'CompanyController@editForm')->name('companyEditForm');
+	Route::post('/companies/edit/{company}', 'CompanyController@update')->name('companyUpdate');
 
-// PETITIONS
-Route::get('/petitions/', 'PetitionController@index')->name('petitionIndex');
-Route::delete('/petitions/remove/{petition}', 'PetitionController@remove')->name('petitionRemove');
-Route::get('/petitions/add', 'PetitionController@addForm')->name('petitionAddForm');
-Route::post('/petitions/', 'PetitionController@store')->name('petitionStore');
-Route::get('/petitions/edit/{petition}', 'PetitionController@editForm')->name('petitionEditForm');
-Route::post('/petitions/edit/{petition}', 'PetitionController@update')->name('petitionUpdate');
+	// STUDIES
+	Route::get('/studies/', 'StudyController@index')->name('studyIndex');
+	Route::delete('/studies/remove/{study}', 'StudyController@remove')->name('studyRemove');
+	Route::get('/studies/add', 'StudyController@addForm')->name('studyAddForm');
+	Route::post('/studies/add', 'StudyController@store')->name('studyStore');
+	Route::get('/studies/edit/{study}', 'StudyController@editForm')->name('studyEditForm');
+	Route::post('/studies/edit/{study}', 'StudyController@update')->name('studyUpdate');
 
-define('TYPES', array ('petitionsFCT' => 'fct', 'petitionsPracticas' => 'prácticas'));
+	// PETITIONS
+	Route::get('/petitions/', 'PetitionController@index')->name('petitionIndex');
+	Route::delete('/petitions/remove/{petition}', 'PetitionController@remove')->name('petitionRemove');
+	Route::get('/petitions/add', 'PetitionController@addForm')->name('petitionAddForm');
+	Route::post('/petitions/', 'PetitionController@store')->name('petitionStore');
+	Route::get('/petitions/edit/{petition}', 'PetitionController@editForm')->name('petitionEditForm');
+	Route::post('/petitions/edit/{petition}', 'PetitionController@update')->name('petitionUpdate');
 
-// PDF
-Route::get('grades/edit/pdfGradesTypes/{id}', function($id) {
-	$grade = grade::find($id);
-	$data = ['gradeName' => $grade->name, 'gradeLevel' => $grade->level];
+	define('TYPES', array ('petitionsFCT' => 'fct', 'petitionsPracticas' => 'prácticas'));
 
-	foreach ( TYPES as $i => $type ){
-		$data[$i] = petition::where('id_grade', $id)->where('type', $type)->get();
-	}
-	
-    $pdf = PDF::loadView('pdf.pdfGradesTypes', $data);
-    return $pdf->download($grade->name . '(Solicitudes).pdf');
-});
+	// PDF
+	Route::get('grades/edit/pdfGradesTypes/{id}', function($id) {
+		$grade = grade::find($id);
+		$data = ['gradeName' => $grade->name, 'gradeLevel' => $grade->level];
 
-Route::get('grades/edit/pdfGradesTypes/{id}/{type}', function($id, $type) {
-	$grade = grade::find($id);
-	
-	$data = [
-		'gradeName' => $grade->name, 
-		'gradeLevel' => $grade->level
-	];
+		foreach ( TYPES as $i => $type ){
+			$data[$i] = petition::where('id_grade', $id)->where('type', $type)->get();
+		}
+		
+		$pdf = PDF::loadView('pdf.pdfGradesTypes', $data);
+		return $pdf->download($grade->name . '(Solicitudes).pdf');
+	});
 
-	$data['petitions'] = petition::where('id_grade', $id)->where('type', TYPES[$type])->get();
-	
-    $pdf = PDF::loadView('pdf.pdfIndividualType', $data);
-    return $pdf->download($grade->name . '(Solicitudes).pdf');
+	Route::get('grades/edit/pdfGradesTypes/{id}/{type}', function($id, $type) {
+		$grade = grade::find($id);
+		
+		$data = [
+			'gradeName' => $grade->name, 
+			'gradeLevel' => $grade->level
+		];
+
+		$data['petitions'] = petition::where('id_grade', $id)->where('type', TYPES[$type])->get();
+		
+		$pdf = PDF::loadView('pdf.pdfIndividualType', $data);
+		return $pdf->download($grade->name . '(Solicitudes).pdf');
+	});
 });

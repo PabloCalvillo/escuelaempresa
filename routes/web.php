@@ -55,6 +55,6 @@ Route::post('/studies/edit/{study}', 'StudyController@update')->name('studyUpdat
 Route::get('/petitions/', 'PetitionController@index')->name('petitionIndex');
 Route::delete('/petitions/remove/{petition}', 'PetitionController@remove')->name('petitionRemove');
 Route::get('/petitions/add', 'PetitionController@addForm')->name('petitionAddForm');
-Route::post('/petitions/add', 'PetitionController@store')->name('petitionStore');
+Route::post('/petitions/', 'PetitionController@store')->name('petitionStore');
 Route::get('/petitions/edit/{petition}', 'PetitionController@editForm')->name('petitionEditForm');
 Route::post('/petitions/edit/{petition}', 'PetitionController@update')->name('petitionUpdate');

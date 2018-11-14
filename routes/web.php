@@ -62,11 +62,31 @@ Route::post('/petitions/', 'PetitionController@store')->name('petitionStore');
 Route::get('/petitions/edit/{petition}', 'PetitionController@editForm')->name('petitionEditForm');
 Route::post('/petitions/edit/{petition}', 'PetitionController@update')->name('petitionUpdate');
 
+define('TYPES', array ('petitionsFCT' => 'fct', 'petitionsPracticas' => 'prácticas'));
+
 // PDF
 Route::get('grades/edit/pdfGradesTypes/{id}', function($id) {
-    $grade = grade::find($id);
-    $petitionsFCT = petition::where('id_grade', $id)->where('type', 'fct')->get();
-    $petitionsPracticas = petition::where('id_grade', $id)->where('type', 'prácticas')->get();
-    $pdf = PDF::loadView('pdf.pdfGradesTypes', ['gradeName' => $grade->name, 'gradeLevel' => $grade->level, 'petitionsFCT' => $petitionsFCT, 'petitionsPracticas' => $petitionsPracticas]);
+	$grade = grade::find($id);
+	$data = ['gradeName' => $grade->name, 'gradeLevel' => $grade->level];
+
+	foreach ( TYPES as $i => $type ){
+		$data[$i] = petition::where('id_grade', $id)->where('type', $type)->get();
+	}
+	
+    $pdf = PDF::loadView('pdf.pdfGradesTypes', $data);
+    return $pdf->download($grade->name . '(Solicitudes).pdf');
+});
+
+Route::get('grades/edit/pdfGradesTypes/{id}/{type}', function($id, $type) {
+	$grade = grade::find($id);
+	
+	$data = [
+		'gradeName' => $grade->name, 
+		'gradeLevel' => $grade->level
+	];
+
+	$data['petitions'] = petition::where('id_grade', $id)->where('type', TYPES[$type])->get();
+	
+    $pdf = PDF::loadView('pdf.pdfIndividualType', $data);
     return $pdf->download($grade->name . '(Solicitudes).pdf');
 });

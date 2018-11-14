@@ -31,7 +31,7 @@
 			</div>
 			<div class="form-group">
 				<label for="n_students" class="col-md-12 control-label">{{ __("Número de estudiantes") }}</label>
-				<input id="n_students" name="n_students" type="number" class="form-control" />
+				<input id="n_students" name="n_students" type="number" min="0" class="form-control" />
 			</div>
 			<button type="submit" class="btn btn-default"> {{ __("Añadir ") }} </button>
 			<a href="<?=URL::route('petitionIndex');?>" class="btn btn-info pull-right"> {{ __("Volver al listado de solicitudes") }}

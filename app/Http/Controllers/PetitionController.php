@@ -14,6 +14,16 @@ class PetitionController extends Controller
 		return view('petitions.index', compact('petitions'));
 	}
 	
+	public function listPetitionsGrades() {
+		$petitions = petition::orderBy('id_grade', 'asc')->get();
+		return view('petitions.petitionsTypes', compact('petitions'));	
+	}
+
+	public function listPetitionsTypes() {
+		$petitions = petition::orderBy('type', 'asc')->get();
+		return view('petitions.petitionsTypes', compact('petitions'));	
+	}
+
 	public function remove(petition $petition){
 		$petition->delete();
 		return back()->with('message', ['success', __("Solicitud eliminada correctamente")]);

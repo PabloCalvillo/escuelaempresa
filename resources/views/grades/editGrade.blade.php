@@ -21,42 +21,29 @@
 		</form>
 	</div>
 	<div class="col-md-8 col-md-offset-2" style="margin-top:20px;">
-		@if($petitionsFCT->count() == 0 and $petitionsPracticas->count() == 0)
-		<div class="alert alert-danger">
-		{{ __("No hay ningúna solicitud en este momento") }}
-	</div>
-		@endif
-		@if($petitionsFCT->count() > 0)
-		<h1 class="text-center text-mute"> {{ __("Solicitudes de FCT (Dual)") }} </h1>
-		@endif
-		@foreach($petitionsFCT as $petitionFCT)
-		<div class="panel panel-default">
-			<div class="panel-heading" style="display: flex; align-items: center; justify-content: flex-end;">
-				<span style="margin-right: auto;">
-					<a href="" style="margin-right: auto;"> {{ $petitionFCT->company->name }}</a> quiere {{ $petitionFCT->n_students }}
-					estudiante{{ $petitionFCT->n_students == 1 ? '' : 's' }} </a>
-				</span>
-				
+		@forelse ($petitionTypes as $type => $petitions)
+			<h2 class="text-center text-mute"> {{ __("Solicitudes de ") }} {{ $type }}</h2>
+
+			@forelse ($petitions as $petition)
+				<div class="panel panel-default">
+					<div class="panel-heading" style="display: flex; align-items: center; justify-content: flex-end;">
+						<span style="margin-right: auto;">
+							<a href="" style="margin-right: auto;"> {{ $petition->company->name }}</a> quiere {{ $petition->n_students }}
+							estudiante{{ $petition->n_students == 1 ? '' : 's' }} </a>
+						</span>
+						
+					</div>
+				</div>
+			@empty
+			@endforelse
+		@empty
+			<div class="alert alert-danger">
+				{{ __("No hay ningúna solicitud en este momento") }}
 			</div>
-		</div>
-		@endforeach
-		@if($petitionsPracticas->count() > 0)
-		<h1 class="text-center text-mute"> {{ __("Solicitudes de prácticas") }} </h1>
-		@endif
-		@foreach($petitionsPracticas as $petitionPractica)
-		<div class="panel panel-default">
-			<div class="panel-heading" style="display: flex; align-items: center; justify-content: flex-end;">
-				<span style="margin-right: auto;">
-					<a href="" style="margin-right: auto;"> {{ $petitionPractica->company->name }}</a> quiere {{ $petitionPractica->n_students }}
-					estudiante{{ $petitionPractica->n_students == 1 ? '' : 's' }} </a>
-				</span>
-				
-			</div>
-		</div>
-		@endforeach
-		@if($petitionsFCT->count() > 0 or $petitionsPracticas->count() > 0)
-		<a href="./pdfGradesTypes/{{ $grade->id }}" class="btn btn-info pull-right"> {{ __("Descargar PDF") }}
-			</a>
+		@endforelse
+		
+		@if( $petitions->count() > 0 )
+			<a href="./pdfGradesTypes/{{ $grade->id }}" class="btn btn-info pull-right"> {{ __("Descargar PDF") }}</a>
 		@endif
 	</div>
 </div>

@@ -25,8 +25,9 @@
 			<div class="form-group">
 				<label for="type" class="col-md-2 control-label">{{ __("Tipo") }}</label>
 				<select id="type" name="type">
-					<option value="FCT">FCT (Dual)</option>
-					<option value="Prácticas">Prácticas</option>
+					<option value="FCT">FCT</option>
+					<option value="Dual">Dual</option>
+					<option value="Trabajo">Trabajo</option>
 				</select>
 			</div>
 			<div class="form-group">

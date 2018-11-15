@@ -18,6 +18,11 @@ class StudentController extends Controller
     }
 
     public function store() {
+		request()->validate([
+			'name' => 'required',
+			'lastname' => 'required',
+			'age' => 'required'
+		]);
         student::create(request()->all());
         return back()->with('message', ['success', __("Alumno añadido correctamente")]);
     }

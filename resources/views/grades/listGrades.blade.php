@@ -5,7 +5,7 @@
 	<div class="col-md-8 col-md-offset-2">
 	<h1 class="text-center text-mute"> {{ __("Ciclos") }} 
 	@if(Auth::user()->email == 'admin@admin.com')
-	<a style="float:right;" href="<?=URL::route('addGrade');?>"><i class="fas fa-user-plus"></i></a>
+	<a style="float:right;" href="<?=URL::route('addGrade');?>"><i class="fas fa-graduation-cap"></i>+</a>
 	@endif
 	</h1>
 	@forelse($grades as $grade)

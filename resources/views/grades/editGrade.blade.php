@@ -22,20 +22,21 @@
 	</div>
 	<div class="col-md-8 col-md-offset-2" style="margin-top:20px;">
 		@forelse ($petitionTypes as $type => $petitions)
-			<h2 class="text-center text-mute"> {{ __("Solicitudes de ") }} {{ $type }}</h2>
+			@if ($petitions->count() > 0)
+				<h2 class="text-center text-mute"> {{ __("Solicitudes de ") }} {{ $type }}</h2>
 
-			@forelse ($petitions as $petition)
-				<div class="panel panel-default">
-					<div class="panel-heading" style="display: flex; align-items: center; justify-content: flex-end;">
-						<span style="margin-right: auto;">
-							<a href="" style="margin-right: auto;"> {{ $petition->company->name }}</a> quiere {{ $petition->n_students }}
-							estudiante{{ $petition->n_students == 1 ? '' : 's' }} </a>
-						</span>
-						
+				@foreach ($petitions as $petition)
+					<div class="panel panel-default">
+						<div class="panel-heading" style="display: flex; align-items: center; justify-content: flex-end;">
+							<span style="margin-right: auto;">
+								<a href="{{ route('companyEditForm', $petition->company->id) }}" style="margin-right: auto;"> {{ $petition->company->name }}</a> quiere {{ $petition->n_students }}
+								estudiante{{ $petition->n_students == 1 ? '' : 's' }} </a>
+							</span>
+							
+						</div>
 					</div>
-				</div>
-			@empty
-			@endforelse
+				@endforeach
+			@endif
 		@empty
 			<div class="alert alert-danger">
 				{{ __("No hay ningúna solicitud en este momento") }}

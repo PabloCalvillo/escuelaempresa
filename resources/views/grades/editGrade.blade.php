@@ -26,7 +26,9 @@
 
 			<ul class="nav nav-tabs">
 				@foreach ($petitionTypes as $type => $petitions)
-					<li role="presentation" data-tab="{{ $type }}"><a href="#">{{ $type }}</a></li>
+					@if ($petitions->count() > 0)
+						<li role="presentation" data-tab="{{ $type }}"><a href="#">{{ $type }}</a></li>
+					@endif
 				@endforeach
 			</ul>
 

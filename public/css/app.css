@@ -4,6 +4,10 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
+[id^=petition-container-]:not(.show){
+	display: none;
+}
+
 .form-group label{
 	padding-left: 0;
 }

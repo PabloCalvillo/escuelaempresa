@@ -2,6 +2,43 @@
 
 @section('content')
 <div class="row">
+	<div class="col-md-8 col-md-offset-2" style="margin-top:20px;">
+		@if ($petitionTypes)
+	<a href="../find/{{ $grade->id }}" class="btn btn-default pull-right"> {{ __("Buscar for fecha ") }} </a>
+			<ul class="nav nav-tabs">
+				@foreach ($petitionTypes as $type => $petitions)
+					@if ($petitions->count() > 0)
+						<li role="presentation" data-tab="{{ $type }}"><a href="#">{{ $type }}</a></li>
+					@endif
+				@endforeach
+			</ul>
+			@foreach ($petitionTypes as $type => $petitions)
+				@if ($petitions->count() > 0)
+					<div id="petition-container-{{ $type }}">
+						<h2 class="text-center text-mute"> {{ __("Solicitudes de ") }} {{ $type }}</h2>
+						@foreach ($petitions as $petition)
+							<div class="panel panel-default">
+								<div class="panel-heading" style="display: flex; align-items: center; justify-content: flex-end;">
+									<span style="margin-right: auto;">
+										<a href="{{ route('companyEditForm', $petition->company->id) }}" style="margin-right: auto"> {{ $petition->company->name }}</a> quiere {{ $petition->n_students }}
+										estudiante{{ $petition->n_students == 1 ? '' : 's' }} </a>
+									</span>
+									
+								</div>
+							</div>
+						@endforeach
+
+						<a href="./pdfGradesTypes/{{ $grade->id }}/{{ $type }}" class="btn btn-info pull-right"> {{ __("Descargar PDF") }}</a>
+					</div>
+				@endif
+			@endforeach
+			<a href="./pdfGradesTypes/{{ $grade->id }}" class="btn btn-info pull-left"> {{ __("Descargar PDF general") }}</a>
+		@else
+			<div class="alert alert-danger">
+				{{ __("No hay ningúna solicitud en este momento") }}
+			</div>
+		@endif
+	</div>
 	<div class="col-md-8 col-md-offset-2">
 		<h1 class="text-center text-mute"> {{ __("Editar ciclo") }} </h1>
 		<form method="POST" action="<?=URL::route('updateGrade');?>">
@@ -19,45 +56,6 @@
 			<a href="<?=URL::route('listgrades');?>" class="btn btn-info pull-right"> {{ __("Volver al listado de ciclos") }}
 			</a>
 		</form>
-	</div>
-	<div class="col-md-8 col-md-offset-2" style="margin-top:20px;">
-		@if ($petitionTypes)
-			<a href="./pdfGradesTypes/{{ $grade->id }}" class="btn btn-info pull-right"> {{ __("Descargar PDF general") }}</a>
-
-			<ul class="nav nav-tabs">
-				@foreach ($petitionTypes as $type => $petitions)
-					@if ($petitions->count() > 0)
-						<li role="presentation" data-tab="{{ $type }}"><a href="#">{{ $type }}</a></li>
-					@endif
-				@endforeach
-			</ul>
-
-			@foreach ($petitionTypes as $type => $petitions)
-				@if ($petitions->count() > 0)
-					<div id="petition-container-{{ $type }}">
-						<h2 class="text-center text-mute"> {{ __("Solicitudes de ") }} {{ $type }}</h2>
-
-						@foreach ($petitions as $petition)
-							<div class="panel panel-default">
-								<div class="panel-heading" style="display: flex; align-items: center; justify-content: flex-end;">
-									<span style="margin-right: auto;">
-										<a href="{{ route('companyEditForm', $petition->company->id) }}" style="margin-right: auto;"> {{ $petition->company->name }}</a> quiere {{ $petition->n_students }}
-										estudiante{{ $petition->n_students == 1 ? '' : 's' }} </a>
-									</span>
-									
-								</div>
-							</div>
-						@endforeach
-
-						<a href="./pdfGradesTypes/{{ $grade->id }}/{{ $type }}" class="btn btn-info pull-right"> {{ __("Descargar PDF") }}</a>
-					</div>
-				@endif
-			@endforeach
-		@else
-			<div class="alert alert-danger">
-				{{ __("No hay ningúna solicitud en este momento") }}
-			</div>
-		@endif
 	</div>
 </div>
 

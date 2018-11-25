@@ -51,4 +51,21 @@ class GradeController extends Controller
         $grades->delete();
         return back()->with('message', ['success', __("Ciclo eliminado correctamente")]);
     }
+
+    public function find($id) {
+        $petitionsByDate = [];
+        return view('grades.findGrades', compact('id', 'petitionsByDate'));
+    }
+
+    public function findByDate(Request $request) {
+    //    dd($request->id, $request->inicio, $request->fin);
+        $id = $request->id;
+        $inicio = date('d-m-Y', strtotime($request->inicio));
+        $fin = date('d-m-Y', strtotime($request->fin));
+        $petitionsByDate = petition::where('id_grade', $id)->whereBetween('created_at', array($request->inicio, $request->fin))->get();
+        return view('grades.findGrades', compact('id', 'petitionsByDate', 'inicio', 'fin'));
+        
+    }
+
+    
 }   

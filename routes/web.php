@@ -48,6 +48,8 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('/grade/store', 'GradeController@store')->name('storeGrade');
 	Route::post('/grades/update', 'GradeController@update')->name('updateGrade');
 	Route::get('/grades/edit/{gradeId}', 'GradeController@edit')->name('editGrade');
+	Route::get('/grades/find/{id}', 'GradeController@find')->name('find');
+	Route::post('/grades/findByDate/', 'GradeController@findByDate')->name('findByDate');
 
 	// COMPANIES
 	Route::get('/companies/', 'CompanyController@index')->name('companyIndex');

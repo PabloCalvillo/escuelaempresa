@@ -50,15 +50,17 @@ class GradeController extends Controller
 
     public function find($id) {
         $petitionsByDate = [];
-        return view('grades.findGrades', compact('id', 'petitionsByDate'));
+        $grade = grade::find($id);
+        return view('grades.findGrades', compact('id', 'petitionsByDate', 'grade'));
     }
 
     public function findByDate(Request $request) {
         $id = $request->id;
+        $grade = grade::find($id);
         $inicio = date('d-m-Y', strtotime($request->inicio));
         $fin = date('d-m-Y', strtotime($request->fin));
         $petitionsByDate = petition::where('id_grade', $id)->whereBetween('created_at', array($request->inicio, $request->fin))->get();
-        return view('grades.findGrades', compact('id', 'petitionsByDate', 'inicio', 'fin'));
+        return view('grades.findGrades', compact('id', 'petitionsByDate', 'inicio', 'fin', 'grade'));
     }
 
     public function info($id) {

@@ -104,4 +104,21 @@ Route::group(['middleware' => 'auth'], function() {
 		$pdf = PDF::loadView('pdf.pdfIndividualType', $data);
 		return $pdf->download($grade->name . '(Solicitudes).pdf');
 	})->name('pdfGradeTypes');
+
+	Route::get('grades/edit/pdfGradeDate/{id}/{inicio}/{fin}', function($id, $inicio, $fin) {
+		// dd(petition::where('id_grade', $id)->whereBetween('created_at', array($inicio, $fin)));
+		$grade = grade::find($id);
+		$inicioDate = date('Y-m-d', strtotime($inicio));
+		$finDate = date('Y-m-d', strtotime($fin));
+		$petitions = petition::where('id_grade', $id)->whereBetween('created_at', array($inicioDate, $finDate))->get();
+		$data = [
+			'grade' => $grade,
+			'inicio' => $inicio,
+			'fin' => $fin,
+			'petitions' => $petitions,
+		];
+		$pdf = PDF::loadView('pdf.pdfByDate', $data);
+		return $pdf->download($grade->name . '(Solicitudes ' . $inicio . '-' . $fin . ').pdf');
+
+	})->name('pdfGradeDate');
 });

@@ -102,7 +102,7 @@ Route::group(['middleware' => 'auth'], function() {
 		$data['petitions'] = petition::where('id_grade', $id)->where('type', $type)->get();
 		
 		$pdf = PDF::loadView('pdf.pdfIndividualType', $data);
-		return $pdf->download($grade->name . '(Solicitudes).pdf');
+		return $pdf->download($grade->name . '(Solicitudes-' . $type . ').pdf');
 	})->name('pdfGradeTypes');
 
 	Route::get('grades/edit/pdfGradeDate/{id}/{inicio}/{fin}', function($id, $inicio, $fin) {
@@ -118,7 +118,7 @@ Route::group(['middleware' => 'auth'], function() {
 			'petitions' => $petitions,
 		];
 		$pdf = PDF::loadView('pdf.pdfByDate', $data);
-		return $pdf->download($grade->name . '(Solicitudes ' . $inicio . '-' . $fin . ').pdf');
+		return $pdf->download($grade->name . '(Solicitudes ' . $inicio . '_' . $fin . ').pdf');
 
 	})->name('pdfGradeDate');
 });

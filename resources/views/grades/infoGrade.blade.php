@@ -28,7 +28,7 @@
 							</div>
 						@endforeach
 
-						<a href="{{ route('pdfGradeTypes', ['id' => $grade->id, 'type' => $petition->type]) }}" class="btn btn-info pull-right"> {{ __("Descargar PDF") }}</a>
+                        <a href="{{ route('pdfGradeTypes', ['id' => $grade->id, 'type' => $petition->type]) }}" class="btn btn-info pull-right"> Descargar PDF ({{$petition->type}})</a>
 					</div>
 				@endif
 			@endforeach

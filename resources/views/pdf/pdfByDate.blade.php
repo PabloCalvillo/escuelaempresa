@@ -1,8 +1,16 @@
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<style>
+	body {
+		background-color: white;
+		font-family: 'Montserrat', sans-serif !important;
+
+	}
+</style>
 <h1>Solicitudes del grado: {{ $grade->name }} de {{ $grade->level }}</h1>
 <h2>Periodo de {{ $inicio }} a {{ $fin }} </h2>
 
 @if($petitions->count() > 0)
-<table align="center" style="border: 1px solid black;">
+<table align="center" class="table table-hover" style="border: 1px solid black;">
 	<thead>
 		<tr>
 			<th style="border: 1px solid black;">Empresa</th>

@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/grades/edit/{gradeId}', 'GradeController@edit')->name('editGrade');
 	Route::get('/grades/find/{id}', 'GradeController@find')->name('find');
 	Route::post('/grades/findByDate/', 'GradeController@findByDate')->name('findByDate');
+	Route::get('/grades/info/{id}', 'GradeController@info')->name('infoGrade');
 
 	// COMPANIES
 	Route::get('/companies/', 'CompanyController@index')->name('companyIndex');
@@ -88,7 +89,7 @@ Route::group(['middleware' => 'auth'], function() {
 		
 		$pdf = PDF::loadView('pdf.pdfGradesTypes', $data);
 		return $pdf->download($grade->name . '(Solicitudes).pdf');
-	});
+	})->name('pdfGrade');
 
 	Route::get('grades/edit/pdfGradesTypes/{id}/{type}', function($id, $type) {
 		$grade = grade::find($id);
@@ -102,5 +103,5 @@ Route::group(['middleware' => 'auth'], function() {
 		
 		$pdf = PDF::loadView('pdf.pdfIndividualType', $data);
 		return $pdf->download($grade->name . '(Solicitudes).pdf');
-	});
+	})->name('pdfGradeTypes');
 });

@@ -12,7 +12,7 @@
 	<div class="panel panel-default">
 	<div class="panel-heading">
 	@if(Auth::user()->email == 'admin@admin.com')
-	<a href="../grades/edit/{{ $grade->id }}"> {{ $grade->name }}</a>
+	<a href="../grades/info/{{ $grade->id }}"> {{ $grade->name }}</a>
 	@else
 	{{ $grade->name }}
 	@endif
@@ -20,6 +20,7 @@
 	{{ method_field('DELETE') }} 
 	{{ csrf_field() }}
 	@if(Auth::user()->email == 'admin@admin.com')
+	<a href="{{ route('editGrade', ['grade' => $grade->id]) }}" style="margin-right: 15px">Editar</a>
 	<button type="submit" style="margin-top:-6px;margin-right:-8px;"><i class="far fa-trash-alt"></i></button>
 	@endif
 	</form>

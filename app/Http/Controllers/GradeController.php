@@ -38,12 +38,8 @@ class GradeController extends Controller
     }
 
     public function edit($id) {
-		$grade = grade::find($id);
-		$petitionTypes = [];
-		$petitionTypes['FCT'] = petition::where('id_grade', $id)->where('type', 'FCT')->get();
-        $petitionTypes['Dual'] = petition::where('id_grade', $id)->where('type', 'Dual')->get();
-        $petitionTypes['Trabajo'] = petition::where('id_grade', $id)->where('type', 'Trabajo')->get();
-        return view('grades.editGrade', compact('grade', 'petitionTypes'));
+        $grade = grade::find($id);
+        return view('grades.editGrade', compact('grade'));
     }
 
     public function removeGrade($id) {
@@ -58,14 +54,20 @@ class GradeController extends Controller
     }
 
     public function findByDate(Request $request) {
-    //    dd($request->id, $request->inicio, $request->fin);
         $id = $request->id;
         $inicio = date('d-m-Y', strtotime($request->inicio));
         $fin = date('d-m-Y', strtotime($request->fin));
         $petitionsByDate = petition::where('id_grade', $id)->whereBetween('created_at', array($request->inicio, $request->fin))->get();
         return view('grades.findGrades', compact('id', 'petitionsByDate', 'inicio', 'fin'));
-        
     }
 
+    public function info($id) {
+        $grade = grade::find($id);
+        $petitionTypes = [];
+		$petitionTypes['FCT'] = petition::where('id_grade', $id)->where('type', 'FCT')->get();
+        $petitionTypes['Dual'] = petition::where('id_grade', $id)->where('type', 'Dual')->get();
+        $petitionTypes['Trabajo'] = petition::where('id_grade', $id)->where('type', 'Trabajo')->get();
+        return view('grades.infoGrade', compact('grade', 'petitionTypes'));
+    }
     
 }   

@@ -16,6 +16,7 @@
 			<th style="border: 1px solid black;">Empresa</th>
 			<th style="border: 1px solid black;">Tipo</th>
 			<th style="border: 1px solid black;">Nº alumnos</th>
+			<th style="border: 1px solid black;">Fecha</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -25,10 +26,13 @@
 				{{ $petition->company->name}}
 			</td>
 			<td style="text-align:center;border: 1px solid black;">
+				{{ $petition->type}}
+			</td>
+			<td style="text-align:center;border: 1px solid black;">
 				{{ $petition->n_students}}
 			</td>
 			<td style="text-align:center;border: 1px solid black;">
-				{{ $petition->type}}
+				{{ $petition->created_at}}
 			</td>
 		</tr>
 		@endforeach
